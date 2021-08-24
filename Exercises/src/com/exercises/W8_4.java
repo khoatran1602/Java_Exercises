@@ -1,35 +1,6 @@
-Main class
-package sample;
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.Objects;
-
-public class Main extends Application {
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-}
-Controller class
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
@@ -38,20 +9,31 @@ public class Controller {
     @FXML
     private Circle circle;
 
+    @FXML
+    private Pane layout;
+
 
     public void left() {
-        circle.setCenterX(circle.getCenterX() - 20);
+        circle.setCenterX(circle.getCenterX() > circle.getRadius() ?
+                circle.getCenterX() - 20 : circle.getCenterX());
+        circle.setCenterY(circle.getCenterY());
     }
 
     public void right() {
-        circle.setCenterX(circle.getCenterX() + 20);
+        circle.setCenterX(circle.getCenterX() < layout.getPrefWidth()  - circle.getRadius() ?
+                circle.getCenterX() + 20 : circle.getCenterX());
+        circle.setCenterY(circle.getCenterY());
     }
 
     public void up() {
-        circle.setCenterY(circle.getCenterY() - 20);
+        circle.setCenterY(circle.getCenterY() > circle.getRadius() ?
+                circle.getCenterY() - 20 : circle.getCenterY());
+        circle.setCenterX(circle.getCenterX());
     }
 
     public void down() {
-        circle.setCenterY( circle.getCenterY() + 20);
+        circle.setCenterY(circle.getCenterY() < layout.getPrefHeight() - circle.getRadius() ?
+                circle.getCenterY() + 20 : circle.getCenterY());
+        circle.setCenterX(circle.getCenterX());
     }
 }
