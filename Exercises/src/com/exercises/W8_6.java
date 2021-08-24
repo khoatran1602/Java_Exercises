@@ -1,8 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -11,13 +9,11 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
-//        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
+    public void start(Stage stage) {
         Pane root = new Pane();
         Circle circle1 = new Circle(50, 50, 20);
         Circle circle2 = new Circle(130, 80, 20);
@@ -32,8 +28,8 @@ public class Main extends Application {
                 root.getChildren().addAll(getLine(circle1, circle2), circle1, circle2, getText(circle1, circle2));
             } else if (circle2.contains(e.getX(), e.getY())) {
                 root.getChildren().clear();
-                circle1.setCenterX(e.getX());
-                circle1.setCenterY(e.getY());
+                circle2.setCenterX(e.getX());
+                circle2.setCenterY(e.getY());
                 root.getChildren().addAll(getLine(circle1, circle2), circle1, circle2, getText(circle1, circle2));
             }
         });
